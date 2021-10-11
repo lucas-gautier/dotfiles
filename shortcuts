@@ -1,0 +1,16 @@
+# aliases for commonly used functionality
+
+# spring boot
+# The --volume flag requires the :Z option for SELinux compatability
+bootPodman='podman run --volume=./build/libs:/deployments:Z --publish=8080:8080 --interactive --tty registry.access.redhat.com/openjdk/openjdk-11-rhel7:latest'
+
+# podman quick starts
+# spring
+startme() { ./gradlew build && $bootPodman; }
+cleanme() { ./gradlew clean build && $bootPodman; }
+
+# git
+alias gs='git status'
+alias gaa='git add -A'
+gc() { git commit -m "$1"; }
+
